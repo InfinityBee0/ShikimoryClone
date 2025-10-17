@@ -1,0 +1,68 @@
+#version: "3.9"
+name: ShikimoryClone
+
+services:
+    postgres_data:
+        image: postgres:17-alpine
+        container_name: ${DB_HOST}
+        environment:
+            POSTGRES_DB: ${DB_NAME}
+            POSTGRES_USER: shikimory
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            #PGDATA: "/var/lib/postgresql/data/pgdata"
+        volumes:
+            - ./pg_hba.conf:/etc/postgresql/pg_hba.conf
+            - shikimory_base:/var/lib/postgresql/data
+        networks:
+            - network
+    shikimory_site:
+        image: infinitybee0/shikimory_clone_site:latest
+        depends_on:
+            - shikimory_api
+        volumes:
+            - site_images:/var/www/html/ShikimoryClone/img/posts/
+        ports:
+            - "80:80"
+        networks:
+            - network
+            
+    shikimory_api:
+        image: infinitybee0/shikimory_api:latest
+        depends_on:
+            - postgres_data
+        ports:
+            - "8000:8000"
+            - "0.0.0.0:8000:8000"
+        environment:
+            - DB_NAME=${DB_NAME}
+            - DB_HOST=${DB_HOST}
+            - DB_PASSWORD=${DB_PASSWORD}
+            
+            - SMTP_EMAIL=${SMTP_EMAIL}
+            - SMTP_PASSWORD=${SMTP_PASSWORD}
+            - SMTP_HOST=${SMTP_HOST}
+            - SMTP_PORT=${SMTP_PORT}
+        networks:
+            - network
+        volumes:
+            - site_images:/var/www/html/ShikimoryClone/img/
+    shikimory_parser:
+        image: infinitybee0/shikimory_parser:latest
+        environment:
+            - DB_NAME=${DB_NAME}
+            - DB_HOST=${DB_HOST}
+            - DB_PASSWORD=${DB_PASSWORD}
+        depends_on:
+            - postgres_data
+        networks:
+            - network
+        volumes:
+            - site_images:/var/www/html/ShikimoryClone/img/
+        
+        
+volumes:
+    shikimory_base:
+    site_images:
+networks:
+    network:
+        driver: bridge

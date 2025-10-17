@@ -1,0 +1,70 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
+}
+
+.auth-form {
+  width: 400px;
+
+  padding: 15px;
+  background-color: aquamarine;
+  border-radius: 10px;
+  border: 1px solid black;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  /*gap: 10px;*/
+}
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.form-row.spacer {
+  margin-top: 14px;
+}
+
+.auth-form .tab-button {
+  font-size: 1.2em;
+
+  width: 200px;
+  padding: 10px;
+
+  background-color: #73ffef;
+  border-radius: 10px;
+  border: 1px solid black;
+
+  margin-bottom: 10px;
+}
+
+.auth-form .tab-button.left {
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.auth-form .tab-button.right {
+  /*border-left: none;*/
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.auth-form .tab-button.active {
+  background-color: aqua;
+}
+
+.auth-form .tab-button:hover {
+  background-color: aquamarine;
+}
+.auth-form .tab-button.active:hover {
+  background-color: aqua;
+}
+
+
+/*Tab*/
+.tab {
+  width: 100%;
+}
