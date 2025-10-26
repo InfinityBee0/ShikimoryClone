@@ -73,8 +73,8 @@ class Tags(Base):
 
 try:
     engine = create_engine(
-        f"postgresql+psycopg2://shikimory:{environ.get("DB_PASSWORD")}@{environ.get("DB_HOST", "postgres_data")}/"
-        f"{environ.get("DB_NAME", "shikimory_clone")}")
+        f"postgresql+psycopg2://shikimory:{environ.get('DB_PASSWORD')}@{environ.get('DB_HOST', 'localhost')}/"
+        f"{environ.get('DB_NAME', 'shikimory_clone')}")
     Base.metadata.create_all(engine)
 except Exception as msg:
     logging.exception("sql_error")

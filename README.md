@@ -4,9 +4,7 @@
 
 ## Docker Hub
 
-- [ShikimoryAPI](https://hub.docker.com/r/infinitybee0/shikimory_api)
-- [ShikimoryParser](https://hub.docker.com/r/infinitybee0/shikimory_parser)
-- [ShikimoryCloneSite](https://hub.docker.com/r/infinitybee0/shikimory_clone_site)
+- [ShikimoryClone](https://hub.docker.com/r/infinitybee0/shikimory_clone)
 
 ## Установка
 

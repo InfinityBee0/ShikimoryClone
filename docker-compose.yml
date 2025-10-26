@@ -15,24 +15,14 @@ services:
             - shikimory_base:/var/lib/postgresql/data
         networks:
             - network
-    shikimory_site:
-        image: infinitybee0/shikimory_clone_site:latest
-        depends_on:
-            - shikimory_api
-        volumes:
-            - site_images:/var/www/html/ShikimoryClone/img/posts/
-        ports:
-            - "80:80"
-        networks:
-            - network
-            
-    shikimory_api:
-        image: infinitybee0/shikimory_api:latest
+    shikimory_clone:
+        image: infinitybee0/shikimory_clone:latest
         depends_on:
             - postgres_data
         ports:
             - "8000:8000"
             - "0.0.0.0:8000:8000"
+            - "80:80"
         environment:
             - DB_NAME=${DB_NAME}
             - DB_HOST=${DB_HOST}
@@ -45,19 +35,7 @@ services:
         networks:
             - network
         volumes:
-            - site_images:/var/www/html/ShikimoryClone/img/
-    shikimory_parser:
-        image: infinitybee0/shikimory_parser:latest
-        environment:
-            - DB_NAME=${DB_NAME}
-            - DB_HOST=${DB_HOST}
-            - DB_PASSWORD=${DB_PASSWORD}
-        depends_on:
-            - postgres_data
-        networks:
-            - network
-        volumes:
-            - site_images:/var/www/html/ShikimoryClone/img/
+            - site_images:/var/www/html/ShikimoryClone/img/posts/
         
         
 volumes:
